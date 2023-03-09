@@ -23,7 +23,7 @@ export default function ListCocktail() {
     }, []);
 
     const renderItem = ({ item }) => (
-        <Pressable id={item.id} onPress={() => navigation.navigate('Detail', { id: item.id })}>
+        <Pressable id={item.id} onPress={() => navigation.navigate('Detail', { id: item.id, name: item.name})}>
             <View style={styles.itemContainer}>
                 <Image source={{ uri: item.photo }} style={styles.itemImage} />
                 <Text style={styles.itemName}>{item.name}</Text>

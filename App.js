@@ -22,8 +22,9 @@ const FavoritesScreen = () => {
     </View>
   );
 }
-
+ 
 const DetailScreen = ({ route }) => {
+  console.log(route);
   const { id } = route.params;
   return (
     <DetailCocktail id={id}></DetailCocktail>
