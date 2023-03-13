@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Text, ScrollView, View } from 'react-native';
+import { StyleSheet, Image, Text, ScrollView, Fragment, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 export default function DetailCocktail({ id }) {
@@ -14,30 +14,30 @@ export default function DetailCocktail({ id }) {
     }, [id])
 
     return (
-        <ScrollView>
-          {cocktail ? (
+        <ScrollView style={{backgroundColor: 'white'}}>
+          {cocktail &&
             <View style={styles.container}>
               <Image source={{ uri: cocktail.strDrinkThumb }} style={styles.image} />
               <Text style={styles.title}>{cocktail.strDrink}</Text>
-              <Text style={styles.subtitle}>{cocktail.strCategory}</Text>
               <Text style={styles.instructions}>{cocktail.strInstructions}</Text>
-              {Object.keys(cocktail)
-                .filter((key) => key.startsWith('strIngredient') && cocktail[key])
-                .map((ingredientKey) => (
-                <>
-                    <Text key={ingredientKey} style={styles.ingredient}>
-                        {cocktail[ingredientKey]}
-                    </Text>
-                    <Text key={`measure_${ingredientKey}`} style={styles.measure}>
-                        {cocktail[`strMeasure${ingredientKey.slice(13)}`]}
-                    </Text>
-                </>
-                ))
-              }
+              <View>
+                {[...Array(15)].map((_, i) => {
+                  const ingredient = cocktail[`strIngredient${i + 1}`]
+                  const measure = cocktail[`strMeasure${i + 1}`]
+                  if (ingredient && measure) {
+                    return (
+                      <View style={styles.ingredientContainer} key={i}>
+                        <Text style={styles.ingredient}>{ingredient}</Text>
+                        <Text style={styles.measure}>{measure}</Text>
+                      </View>
+                    );
+                  } else {
+                  return null;
+                  }
+                })}
+              </View>     
             </View>
-          ) : (
-            <Text>Loading...</Text>
-          )}
+          }
         </ScrollView>
       );
 }
@@ -48,26 +48,27 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       paddingHorizontal: 20,
+      marginTop: 100,
+      backgroundColor: 'white',
     },
     image: {
-      width: 200,
-      height: 200,
+      width: 300,
+      height: 300,
       marginBottom: 20,
+      borderRadius: 15,
     },
     title: {
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 10,
     },
-    subtitle: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 20,
-    },
     instructions: {
       fontSize: 16,
       textAlign: 'center',
       marginBottom: 30,
+    },
+    ingredientContainer: {
+      alignItems: 'center',
     },
     ingredient: {
       fontSize: 16,
