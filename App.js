@@ -46,7 +46,7 @@ export default function App() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="list-outline" size={size} color={color} />
+              <Ionicons name="list-sharp" size={size} color={color} />
             ),
           }}
         />
@@ -56,7 +56,7 @@ export default function App() {
           options={{
             tabBarShowLabel: false, 
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="wine-outline" size={size} color={color} />
+              <Ionicons name="wine-sharp" size={size} color={color} />
             ),
             headerShown: false,
           }} 
@@ -67,7 +67,7 @@ export default function App() {
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person-outline" size={size} color={color} />
+              <Ionicons name="person-sharp" size={23} color={color} />
             ),
             headerShown: false,
           }} 
